@@ -18,14 +18,13 @@ mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedT
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("Connection Ok");
-    const used = process.memoryUsage();
-for (let key in used) {
-  console.log(`${key} ${Math.round(used[key] / 1024 / 1024 * 100) / 100} MB`);
-}
+
 })
 
 const usersRouter = require('./routes/users');
 app.use('/users', usersRouter);
+
+
 
 app.listen(port, () => {
     console.log(`Server is running on ${port}`);
