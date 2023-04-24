@@ -1,18 +1,12 @@
 
 const testlogic = [
-       {   testAnchor:"hiv", 
-           testName: "ВИЧ",
-           description: "Тест на ВИЧ",
-        conditions: 
-            {},
-        frequency: {
-            repeatEvery: 4,
-            startYear: 15,
-            endYear: 65}
-        },
+       {testAnchor:"hiv", 
+        conditions: {},
+        frequency: {oneTime: 25}},
             
+        //-----Cholesterol Test------//
 
-   // { testAnchor:"cholesterolTest", 
+        // { testAnchor:"cholesterolTest", 
         // conditions: {bloodPressure: "high"},
         // frequency: {repeatEvery: 4, startYear: 21, endYear: 40}},
 
@@ -28,253 +22,176 @@ const testlogic = [
         // conditions:  {highCholesterol: true,},
         // frequency: {repeatEvery: 1, startYear: 30, endYear: 75}},
 
-        {   testAnchor:"aneurysmScreening", 
-            testName: "Abdominal aortic aneurysm screening",
-        conditions: 
-            {gender: "man",
-             age: [">", 65]},
-        frequency: {
-                repeatEvery: 1,
-                startYear: 65,
-                endYear: 100}
-        },
+
+
+         //-----Diabetis------//
+
+        { testAnchor:"diabeticEye", 
+        conditions: {diabetes: "true"},
+        frequency: {repeatEvery: 1, startYear: 18}},
+
+        { testAnchor:"FPG", 
+        conditions: {familyDiabetes: "true"},
+        frequency: {repeatEvery: 1, startYear: 30}},
+
+        { testAnchor:"FPG", 
+        conditions: {bmi: [">", 25]},
+        frequency: {repeatEvery: 1, startYear: 30}},
+
+        { testAnchor:"FPG", 
+        conditions: {bloodPressure: "high"},
+        frequency: {repeatEvery: 1, startYear: 30}},
+
+        { testAnchor:"FPG", 
+        conditions: {},
+        frequency: {repeatEvery: 3, startYear: 45}},
+
+
+
+
+        {testAnchor:"aneurysmScreening", 
+        conditions: {gender: "man",},
+        frequency: {oneTime: 65}},
 
         { testAnchor:"CT-h", 
-        conditions: 
-            {smokingQuestion: "smokingNow",
-        },
-        frequency: {
-            repeatEvery: 1,
-            startYear: 55,
-            endYear: 74}
-        },
+        conditions: {smokingQuestion: "smokingNow",},
+        frequency: {repeatEvery: 1, startYear: 55, endYear: 74}},
 
         { testAnchor:"CT-l", 
-        conditions: 
-            {smokingQuestion: "quitSmoking",
-        },
-        frequency: {
-            repeatEvery: 1,
-            startYear: 74,
-            }
-        },
+        conditions: {smokingQuestion: "quitSmoking"},
+        frequency: {repeatEvery: 1, startYear: 74}},
 
-        { testAnchor:"diabetis", 
-        conditions: 
-            {smokingQuestion: "quitSmoking",
-        },
-        frequency: {
-            repeatEvery: 1,
-            startYear: 74,
-            endYear: 100}
-        },
+ 
+        //-----Cancer------//
 
-        { testAnchor:"breastcancer45", 
-        conditions: 
-            {gender: "woman",
-        },
-        frequency: {
-            repeatEvery: 1,
-            startYear: 45,
-            endYear: 54}
-        },
 
-        { testAnchor:"breastcancer55", 
-        conditions: 
-            {gender: "woman",
-        },
-        frequency: {
-            repeatEvery: 1,
-            startYear: 54,
-            endYear: 71}
-        },
+        { testAnchor:"breastcancer", 
+        conditions: {gender: "woman"},
+        frequency: {repeatEvery: 1, startYear: 45, endYear: 54}},
 
-        { testAnchor:"psa40", 
-        conditions: 
-            {gender: "man",
-            prostateCancer: "true",
-            prostateCancerDetails: "morethan1"
-        },
-        frequency: {
-            repeatEvery: 1,
-            startYear: 40,
-            endYear: 70,
-            
-            }
-        },
+        { testAnchor:"breastcancer", 
+        conditions: {gender: "woman"},
+        frequency: {repeatEvery: 1, startYear: 54, endYear: 71}},
 
-        { testAnchor:"psa45", 
-        conditions: 
-            {gender: "man",
-            prostateCancer: "true",
-            prostateCancerDetails: "under65"
-        },
-        frequency: {
-            repeatEvery: 2,
-            startYear: 42,
-            endYear: 90,
-            
-            }
-        },
+        { testAnchor:"breastcancer", 
+        conditions: {gender: "woman"},
+        frequency: {repeatEvery: 1, startYear: 54, endYear: 71}},
+
+
+
+        { testAnchor:"stomachCancerGeneticTest", 
+        conditions: {stomachCancerDetails: "morethan3"},
+        frequency: {oneTime: 20}},
+
+        { testAnchor:"stomachCancerGeneticTest", 
+        conditions: {stomachCancerDetails: "under40"},
+        frequency: {oneTime: 27}},
+
+        { testAnchor:"stomachCancerGeneticTest", 
+        conditions: {stomachCancerDetails: "under50"},
+        frequency: {oneTime: 35}},
+
+        { testAnchor:"stomachCancerGeneticTest", 
+        conditions: {stomachCancerDetails: "complex"},
+        frequency: {oneTime: 35}},
+
+
+        
+
+
+
+         //-----PSA------//
+
+        { testAnchor:"psa", 
+        conditions: {gender: "man", prostateCancer: "true", prostateCancerDetails: "morethan1"},
+        frequency: {repeatEvery: 1, startYear: 40, endYear: 70}},
+
+        { testAnchor:"psa", 
+        conditions: {gender: "man", prostateCancer: "true", prostateCancerDetails: "under65"},
+        frequency: {repeatEvery: 2, startYear: 42, endYear: 90}},
+
+        { testAnchor:"psa", 
+        conditions: {gender: "man", prostateCancer: "true", prostateCancerDetails: "over65"},
+        frequency: {repeatEvery: 3, startYear: 45, endYear: 95}},
 
         { testAnchor:"psa-baseline", 
-        conditions: 
-            {gender: "man",
-        },
-        frequency: {
-            oneTime: 40,
-            }
-        },
+        conditions: {gender: "man"},
+        frequency: {oneTime: 40}},
 
-        { testAnchor:"psa65", 
-        conditions: 
-            {gender: "man",
-            prostateCancer: "true",
-            prostateCancerDetails: "over65"
-        },
-        frequency: {
-            repeatEvery: 3,
-            startYear: 45,
-            endYear: 95,
-            
-            }
-        },
-        { testAnchor:"colonoscopy50+", 
-        conditions: 
-            {
-                colonCancerMan: "true",
-        },
-        frequency: {
-            repeatEvery: 10,
-            startYear: 50,
-            endYear: 75, 
-            }
-        },
 
-        { testAnchor:"colonoscopy50+", 
-        conditions: 
-            {
-                colonCancerWoman: "true",
-        },
-        frequency: {
-            repeatEvery: 10,
-            startYear: 50,
-            endYear: 75, 
-            }
-        },
 
-        { testAnchor:"colonoscopy75+", 
-        conditions: 
-            {
-                colonCancerMan: "true",
-          
-        },
-        frequency: {
-            repeatEvery: 10,
-            startYear: 75,
-            endYear: 90, 
-            }
-        },
+         //-----Colonoscopy------//
 
-        { testAnchor:"colonoscopy75+", 
-        conditions: 
-            {
-                colonCancerWoman: "true",
-        },
-        frequency: {
-            repeatEvery: 10,
-            startYear: 75,
-            endYear: 90, 
-            }
-        },
 
-        { testAnchor:"colonoscopy40+", 
-        conditions: 
-            {
-                colonCancerDetails: "lessthan60",
-        },
-        frequency: {
-            repeatEvery: 5,
-            startYear: 40,
-            endYear: 75,
-            
-            }
-        },
-        { testAnchor:"colonoscopy40+", 
-        conditions: 
-            {
-                colonCancerDetails: "manyRelatives",
-        },
-        frequency: {
-            repeatEvery: 5,
-            startYear: 40,
-            endYear: 75,
-            
-            }
-        },
-        { testAnchor:"colonoscopy40+", 
-        conditions: 
-            {
-                colonCancerDetails: "over60",
-        },
-        frequency: {
-            repeatEvery: 10,
-            startYear: 40,
-            endYear: 75,
-            
-            }
-        },
 
-        { testAnchor:"colonoscopy40+", 
-        conditions: 
-            {
-                colonCancerDetails: "manyCousins",
-        },
-        frequency: {
-            repeatEvery: 10,
-            startYear: 40,
-            endYear: 75,
-            
-            }
-        },
+        { testAnchor:"colonoscopy", 
+        conditions: {colonCancerMan: "true"},
+        frequency: {repeatEvery: 10, startYear: 75, endYear: 90}},
+
+        { testAnchor:"colonoscopy", 
+        conditions: {colonCancerWoman: "true"},
+        frequency: {repeatEvery: 10, startYear: 75, endYear: 90}},
+
+        { testAnchor:"colonoscopy", 
+        conditions: { colonCancerDetails: "lessthan60"},
+        frequency: {repeatEvery: 5, startYear: 40, endYear: 75}},
+
+        { testAnchor:"colonoscopy", 
+        conditions: {colonCancerDetails: "manyRelatives"},
+        frequency: {repeatEvery: 5, startYear: 40, endYear: 75}},
+
+        { testAnchor:"colonoscopy", 
+        conditions: {colonCancerDetails: "over60"},
+        frequency: {repeatEvery: 10, startYear: 40, endYear: 75}},
+
+        { testAnchor:"colonoscopy", 
+        conditions: {colonCancerDetails: "manyCousins"},
+        frequency: {repeatEvery: 10, startYear: 40, endYear: 75}},
+
+
+
+        { testAnchor:"gastroscopy", 
+        conditions: {chronicStomach: "true"},
+        frequency: {repeatEvery: 10, startYear: 40, endYear: 75}},
+
 
         { testAnchor:"FOBT", 
-        conditions: 
-            {   
-        },
-        frequency: {
-            repeatEvery: 10,
-            startYear: 45,
-            endYear: 75,
-            
-            }
-        },
+        conditions: {},
+        frequency: {repeatEvery: 10, startYear: 45, endYear: 75}},
+
+
+
+         //-----Vaccines------//
 
         { testAnchor:"HPV", 
-        conditions: 
-            {   
-                gender: "woman"
-        },
-        frequency: {
-            oneTime: 18,
-            }
-        },
+        conditions: {gender: "woman"},
+        frequency: {oneTime: 18}},
+        
         { testAnchor:"herpesVaccine", 
-        conditions: 
-            {   
-        },
-        frequency: {
-            oneTime: 50,
-            }
-        },
+        conditions: {},
+        frequency: {oneTime: 50}},
+
         { testAnchor:"pneumococcus", 
-        conditions: 
-            {   
-        },
-        frequency: {
-            oneTime: 60,
-            }
-        },
+        conditions: {},
+        frequency: {oneTime: 60}},
+
+        { testAnchor:"pillar", 
+        conditions: {},
+        frequency: {repeatEvery: 10}},
+
+        { testAnchor:"diphtheria", 
+        conditions: {},
+        frequency: {oneTime: 20}},
+
+        { testAnchor:"measles", 
+        conditions: {},
+        frequency: {oneTime: 24}},
+
+
+
+        
+        //-----Melanoma------//
+
         {testAnchor:"melanoma", 
         conditions: {melanomaMan: "true"},
         frequency: {repeatEvery: 1}},
@@ -283,19 +200,67 @@ const testlogic = [
         conditions: {melanomaWoman: "true"},
         frequency: {repeatEvery: 1}},
 
+
+
+         //-----Other------//
+
         {testAnchor:"dispancer", 
         conditions: {},
-        frequency: {repeatEvery: 3, endYear: 45}},
+        frequency: {repeatEvery: 3, startYear: 15, endYear: 45}},
 
-        {testAnchor:"dantist", 
+        {testAnchor:"dentist", 
         conditions: {},
         frequency: {repeatEvery: 2, endYear: 65}},
 
         {testAnchor:"vitaminD", 
         conditions: {},
         frequency: {oneTime: 18}},
-   ]; 
 
+
+
+        //-----Osteoporosis------//
+
+        {testAnchor:"osteoporosis", 
+        conditions: {brokeBone: "true"},
+        frequency: {repeatEvery: 5, startYear: 50, endYear: 69}},
+
+        {testAnchor:"osteoporosis", 
+        conditions: {relativeHipBroke: "true"},
+        frequency: {repeatEvery: 5, startYear: 50, endYear: 69}},
+
+        {testAnchor:"osteoporosis", 
+        conditions: {alcoholDrink: "heavyDrinker"},
+        frequency: {repeatEvery: 5, startYear: 50, endYear: 69}},
+    
+        //Osteoporosis 70+//
+
+        {testAnchor:"osteoporosis", 
+        conditions: {brokeBone: "true"},
+        frequency: {repeatEvery: 3, startYear: 70}},
+
+        {testAnchor:"osteoporosis", 
+        conditions: {relativeHipBroke: "true"},
+        frequency: {repeatEvery: 3, startYear: 70}},
+       
+
+        {testAnchor:"osteoporosis", 
+        conditions: {alcoholDrink: "heavyDrinker"},
+        frequency: {repeatEvery: 3, startYear: 70}},
+      
+        //в будущем сделать разделение по полу
+
+
+        // BMI //
+
+        { testAnchor:"Dietologist", 
+        conditions: {bmi: [">", 25]},
+        frequency: {oneTime: 18}},
+
+        { testAnchor:"Dietologist", 
+        conditions: {bmi: ["<", 18]},
+        frequency: {oneTime: 18}},
+
+   ]; 
 const countResultsModule = (survey) => {
   
     var surveyObj = JSON.parse(survey);
