@@ -1,3 +1,4 @@
+const _ = require('lodash');
 
 const testlogic = [
        {testAnchor:"hiv", 
@@ -261,89 +262,128 @@ const testlogic = [
         frequency: {oneTime: 18}},
 
    ]; 
+
+   var comparisons = {
+    '<': function(a, b) {return a < b},
+    '>': function(a, b) {return a > b}
+}   
+
 const countResultsModule = (survey) => {
   
     var surveyObj = JSON.parse(survey);
     var tests = [];
 
 
-   Object.values(surveyObj).forEach(function (key) {
-        switch (typeof(key)) {
-            case "object":  break;
-            default: break;
-        }
-   })
-
     testlogic.forEach(function (element) {
 
-        var isChecked = true;
+        var isChecked = true; //тест выбран для пользователя
         var conditions = element.conditions;
 
-        var comparisons = {
-            '<': function(a, b) {return a < b},
-            '>': function(a, b) {return a > b}
-        }
 
-       
      
-         Object.entries(conditions).forEach(function (key) {
-             //  var dividedString = returnOperator(key[1])
-                
-            if(typeof(surveyObj[key[0]]) == "object") {
-                switch(typeof(key[1])) {
+         Object.entries(conditions).forEach(function (conditionElement) { //делает массив из объектов conditions [item1, item2]
+            
+            
+            
+
+            if(typeof(surveyObj[conditionElement[0]]) == "object") { 
+                switch(typeof(conditionElement[1])) { 
                     case "object":   
-                    if(comparisons[key[1][0]](key[1][1], surveyObj[key[0][0]])) {isChecked = false}; 
+                    if(comparisons[conditionElement[1][0]](conditionElement[1][1], surveyObj[conditionElement[0][0]])) {
+ 
+                    } else {
+                        
+                        isChecked = false
+                    }; //if comparisons[>](Условие139,> Мое120) (так можно обратиться). Если оно true, то тест отменяется
                     break;
     
                     case "string":
-                    if(conditions[key[0]] !== surveyObj[key[0]].toString()) {isChecked = false;}; break;
+                    if(conditions[conditionElement[0]] !== surveyObj[conditionElement[0]].toString()) {isChecked = false;}; break; //если значение есть, то оно автоматически true
                     default: break;
                    } 
             }
 
-            if(typeof(surveyObj[key[0]]) == "string" || typeof(surveyObj[key[0]]) == "undefined" || typeof(surveyObj[key[0]]) == "number" ) {
-                switch(typeof(key[1])) {
+            if(typeof(surveyObj[conditionElement[0]]) == "string" || typeof(surveyObj[conditionElement[0]]) == "undefined" || typeof(surveyObj[conditionElement[0]]) == "number" ) {
+                switch(typeof(conditionElement[1])) {
                     case "object":   
-                    if(comparisons[key[1][0]](key[1][1], surveyObj[key[0]])) {isChecked = false}; 
+                    if(comparisons[conditionElement[1][0]](surveyObj[conditionElement[0]], conditionElement[1][1])) {
+                    } else {
+                        isChecked = false
+                    }; 
                     break;
+
+                    case "undefined":
+                        isChecked = false; 
+                        break;
+
+                    case "null":
+                        isChecked = false;
+                        break;    
     
                     case "string": 
-                    if(conditions[key[0]] !== surveyObj[key[0]]) {isChecked = false;}; break;
+                    if(conditions[conditionElement[0]] !== surveyObj[conditionElement[0]]) {isChecked = false;}; break;
                     default: break;
+   
                    } 
             }
 
               
          })
 
-        if(isChecked){
-            tests.push({ testAnchor: element.testAnchor, years: countFreq(surveyObj, element.frequency), description: element.description, importanceDesc: element.importanceDesc}); 
-        } 
-     })
 
-    // if (surveyObj.gender == "man" && surveyObj.age === "60") {
-    //   tests.push({ testName: "brainTest", years: countFreq(surveyObj, 3) });
-    // }
-  
-    // if (surveyObj.gender == "man" && surveyObj.age === "60") {
-    //   tests.push({ testName: "heartTest", years: countFreq(surveyObj, 10) });
-    // }
-  
+
+
+        if(isChecked){
+            tests.push({ testAnchor: element.testAnchor, years: countFreq(surveyObj, element.frequency)}); 
+        } 
+        
+
+     })
+     
+    removeDuplicates(tests) 
+
     return tests;
   };
+
+
+
+  function removeDuplicates(testsArray) {
+
+    for (var i = 0; i < testsArray.length; i++) { 
+        for (var j = i+1; j < testsArray.length; j++) {
+            if (testsArray[i].testAnchor === testsArray[j].testAnchor) {
+                testsArray[i].years = _.union(testsArray[i].years, testsArray[j].years);
+                testsArray.splice(j, 1);
+                j--;
+            }
+        
+
+        // if(testsArray[i].testAnchor === testsArray[i+1].testAnchor) {
+        //     _.union(testsArray[i].years, testsArray[i+1].years)
+        // }
+    }
+    }
+
+  }
+
 
   const countFreq = (surveyObj, freq) => {
     var yearsArray = [];
     var readyArray = [];
-
-    freq.startYear = freq.startYear + getRandomInt(1);
+    
+    if(typeof freq === "number") {
+        freq.startYear = freq.startYear + getRandomInt(1);
+    }
+    
 
     const currentYear = new Date().getFullYear();
     var age = 18;
+
     
-    if (typeof(surveyObj.age) == "number") {
+    if (typeof(surveyObj.age) == "string") {
        age = surveyObj.age;
     }
+
 
     function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
@@ -364,14 +404,19 @@ const countResultsModule = (survey) => {
     }
     else {
             yearsArray.forEach(function (element) {
+
                 
             if(typeof freq.startYear !== 'undefined' && typeof freq.endYear !== 'undefined' ) {
                 if ((element - birthYear) % freq.repeatEvery == 0 && element > (birthYear+freq.startYear) && element <= (birthYear+freq.endYear)) {
-                    readyArray.push(element)}};
+                    readyArray.push(element)
+                }
+            };
             
             if(typeof freq.startYear == 'undefined' && typeof freq.endYear !== 'undefined' ) {
                 if (element % freq.repeatEvery == 0 && element < (birthYear+freq.endYear)) {
-                    readyArray.push(element)}}        
+                    readyArray.push(element)
+                }
+            }        
             
             if(typeof freq.startYear !== 'undefined' && typeof freq.endYear == 'undefined' ) {
                 if (element % freq.repeatEvery == 0 && element > (birthYear+freq.startYear)) {
