@@ -242,12 +242,12 @@ const testlogic = [
         {testAnchor:"osteoporosis", 
         conditions: {relativeHipBroke: "true"},
         frequency: {repeatEvery: 3, startYear: 70}},
-        desc: "Каждый год с 45 до 50"
+      
 
         {testAnchor:"osteoporosis", 
         conditions: {alcoholDrink: "heavyDrinker"},
         frequency: {repeatEvery: 3, startYear: 70}},
-        desc: "Каждый год с 30 до 5"
+     
 
         //в будущем сделать разделение по полу
 
