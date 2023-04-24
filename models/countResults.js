@@ -12,23 +12,21 @@ const testlogic = [
         },
             
 
-        { testAnchor:"cholesterolTest", 
-        conditions: {bloodPressureTop: [">", 135]},
-        frequency: {repeatEvery: 4, startYear: 21, endYear: 40}},
+   // { testAnchor:"cholesterolTest", 
+        // conditions: {bloodPressure: "high"},
+        // frequency: {repeatEvery: 4, startYear: 21, endYear: 40}},
 
-        { testAnchor:"cholesterolTest", 
-        conditions: {bloodPressureLow: [">", 85]},
-        frequency: {repeatEvery: 4, startYear: 20, endYear: 40}},
+        // { testAnchor:"cholesterolTest", 
+        // conditions: {bmi: [">", 30]},
+        // frequency: {repeatEvery: 4, startYear: 21, endYear: 40}},
 
-        {   testAnchor:"cholesterolTest40+", 
-            testName: "Тест на холестерин",
-        conditions: 
-            {},
-        frequency: {
-            repeatEvery: 1,
-            startYear: 40,
-            endYear: 75}
-        },
+        // {testAnchor:"cholesterolTest", 
+        // conditions:  {},
+        // frequency: {repeatEvery: 3, startYear: 40, endYear: 75}},
+
+        // {testAnchor:"cholesterolTest", 
+        // conditions:  {highCholesterol: true,},
+        // frequency: {repeatEvery: 1, startYear: 30, endYear: 75}},
 
         {   testAnchor:"aneurysmScreening", 
             testName: "Abdominal aortic aneurysm screening",
